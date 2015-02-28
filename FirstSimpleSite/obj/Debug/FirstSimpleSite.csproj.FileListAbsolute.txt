@@ -1,0 +1,10 @@
+D:\Andrew\NET_Lab\Day1\FirstSimpleSite\FirstSimpleSite\bin\FirstSimpleSite.dll
+D:\Andrew\NET_Lab\Day1\FirstSimpleSite\FirstSimpleSite\bin\FirstSimpleSite.pdb
+D:\Andrew\NET_Lab\Day1\FirstSimpleSite\FirstSimpleSite\obj\Debug\FirstSimpleSite.dll
+D:\Andrew\NET_Lab\Day1\FirstSimpleSite\FirstSimpleSite\obj\Debug\FirstSimpleSite.pdb
+d:\Andrew\NET_Lab\Day1\FirstSimpleSite\FirstSimpleSite\bin\FirstSimpleSite.dll.config
+d:\Andrew\NET_Lab\Day1\FirstSimpleSite\FirstSimpleSite\bin\EntityFramework.dll
+d:\Andrew\NET_Lab\Day1\FirstSimpleSite\FirstSimpleSite\bin\EntityFramework.SqlServer.dll
+d:\Andrew\NET_Lab\Day1\FirstSimpleSite\FirstSimpleSite\bin\EntityFramework.xml
+d:\Andrew\NET_Lab\Day1\FirstSimpleSite\FirstSimpleSite\bin\EntityFramework.SqlServer.xml
+d:\Andrew\NET_Lab\Day1\FirstSimpleSite\FirstSimpleSite\obj\Debug\FirstSimpleSite.csprojResolveAssemblyReference.cache

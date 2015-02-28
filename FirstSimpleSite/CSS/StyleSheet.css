@@ -1,0 +1,70 @@
+﻿ body{ 
+            background-image: url(../Content/fon2.jpg);
+        }
+        .logid-div { 
+            background-color: #F0FFFF ;
+            border-color: #48D1CC;
+            border-style:solid;
+            width:250px;
+            float:right;
+        }
+        .nav-div {
+            margin: auto;
+            width: 100%;
+            height: auto;
+            border: solid;
+            border-color: #487c57;
+        }
+        .menu {
+            margin-left: 150px;
+            height: 75px;
+            text-align:center;
+        }
+        .menu-ul {
+            margin: 0;
+            margin-top:15px;
+            padding: 0;
+            list-style-type: none;
+            width: 100%;
+            text-align: center;
+            vertical-align: middle;
+        }
+        .menu-li{
+            display: inline;
+            margin-left:2%;
+            margin-right:2%;
+            vertical-align:middle;
+        }
+        .menu-a{
+            vertical-align: middle;
+            color: #fff;
+            padding: 5px 10px;
+            text-decoration: none;
+            font-weight: bold;
+            display: inline-block;
+            width: 100px;
+        }
+        .menu-a:hover{
+            color:#00868B;
+            background:#888;
+        }
+        .logo {
+            float: left;
+            width: 150px;
+            height: 75px;
+            background-image: url(../Content/SampleLogo.png);
+            background-size: cover;
+        }
+        .hellow {
+            align-content:center;
+            font-family:'Times New Roman', Times, serif;
+            font:bold;
+        }
+        .username {
+            align-content:center;
+            font-family:'Times New Roman', Times, serif;
+            font:italic;
+        }
+        .login-info {
+            text-align:center;
+        }

@@ -1,0 +1,40 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <link href="CSS/StyleSheet.css" rel="stylesheet" type="text/css">
+    <script src="Scripts/Task1.js" type="text/javascript" ></script>
+    <title>
+        First Simple Site
+    </title>
+</head>
+<body>
+    <div class="nav-div">
+        <div class="logo"></div>
+        <div class="menu">
+            <ul class="menu-ul">
+                <li class="menu-li"><a class="menu-a" href="#">Меню 1</a></li>
+                <li class="menu-li"><a class="menu-a" href="#">Меню 2</a></li>
+                <li class="menu-li"><a class="menu-a" href="#">Меню 3</a></li>
+                <li class="menu-li"><a class="menu-a" href="#">Меню 4</a></li>
+                <li class="menu-li"><a class="menu-a" href="#">Меню 5</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="logid-div" id="loginDiv" >
+        <form id="LoginForm" method="post" action='#'>
+            <span>Login:</span>
+            <br />
+            <input type="text" id="login" placeholder="Enter your login" value="" />
+            <br />
+            <span>Password:</span>
+            <br />
+            <input type="text" id="pass" placeholder="Your passwrd" value="" />
+            <br />
+            <input type="button" value="Login" onclick="task1.Login()" />
+
+        </form>
+    </div>
+    <div class="login-info" id ="loginInfo"></div>
+    <div id="jsonDiv"></div>
+</body>
+</html>
