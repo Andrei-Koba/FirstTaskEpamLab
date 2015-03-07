@@ -20,10 +20,9 @@ task1.LogoutHtml = function () {
 task1.LoginHtml = function (userName) {
     var logInfo = document.getElementById("loginInfo");
     var loginForm = document.getElementById("LoginForm");
-    var innerHtml = '<h2 class="hellow">Hellow</h2><h2 class="username">' + userName + '</h2><input type="button" value="Logout" onclick="task1.Logout()" />';
+    var innerHtml = '<h2 class="hello">Hello</h2><h2 class="username">' + userName + '</h2><input type="button" value="Logout" onclick="task1.Logout()" />';
     loginForm.innerHTML = innerHtml;
     task1.CreateButton("loginInfo");
-    document.cookie = "userName=" + userName;
 }
 
 task1.Login = function () {
@@ -35,12 +34,13 @@ task1.Login = function () {
     req.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     req.onreadystatechange = function () {
         if (req.readyState == 4) {
-            var state = task1.GetCookie('status');
+            var state = req.responseText;
             var userName = task1.GetCookie('userName');
             if (state === 'Login Success') {
                 task1.LoginHtml(userName);
             }
             else {
+                var logInfo = document.getElementById("loginInfo");
                 var innerHtml = '<span>An error occurred when registering:</span><br /><span>' + state + '</span>';
                 logInfo.innerHTML = innerHtml;
             }
@@ -135,7 +135,7 @@ task1.JsonTree = function (object) {
             case "object":
                 if (value == null) break;
                 var token = Math.random().toString().substr(2);
-                json += "<li style='list-style-type:circle;'><a href='#" + token + "' data-toggle='collapse'>" + prop + "</a><div id='" + token + "' class='collapse'>" + task1.JsonTree(value) + "</div></li>";
+                json += "<li style='list-style-type:circle;'><a class='composite' onclick=task1.hideTree('"+token+"')>" + prop + "</a><div id='" + token + "'>" + task1.JsonTree(value) + "</div></li>";
                 break;
             default:
                 json += "<li>" + prop + ":" + value + "</li>";
@@ -143,3 +143,14 @@ task1.JsonTree = function (object) {
     }
     return json + "</ul>";
 };
+
+task1.hideTree = function (id) {
+    var hiddenElement = document.getElementById(id);
+    if (hiddenElement.hasAttribute('hidden')) {
+        hiddenElement.removeAttribute('hidden');
+    }
+    else
+    {
+        hiddenElement.setAttribute('hidden', 'hidden');
+    }
+}

@@ -14,7 +14,7 @@ namespace FirstSimpleSite.HAndlers
 
         public void ProcessRequest(HttpContext context)
         {
-            context.Response.Cookies[ConfigurationManager.AppSettings["StatusCookie"]].Value = "";
+            context.Response.Cookies[ConfigurationManager.AppSettings["Token"]].Value = "";
             context.Response.Cookies[ConfigurationManager.AppSettings["UserNameCookie"]].Value = "";
         }
 

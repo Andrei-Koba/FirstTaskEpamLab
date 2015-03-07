@@ -6,6 +6,8 @@ using System.Linq;
 using System.Text;
 using System.Configuration;
 using System.Security.Principal;
+using FirstSimpleSite.Security;
+using System.Web.Security;
 
 namespace FirstSimpleSite.AutificationModules
 {
@@ -35,22 +37,38 @@ namespace FirstSimpleSite.AutificationModules
 
         public void OnLogRequest(Object source, EventArgs e)
         {
+            string token = ConfigurationManager.AppSettings["Token"];
             string userNameCookie = ConfigurationManager.AppSettings["UserNameCookie"];
             HttpApplication application = (HttpApplication)source;
             HttpContext context = application.Context;
-            if (context.Request.Cookies[userNameCookie] != null)
+            context.Response.Cookies.Clear();
+            context.Response.Cookies.Clear();
+            if (context.Request.Cookies[token] != null)
             {
-                if (context.Request.Cookies[userNameCookie].Value != null && context.Request.Cookies[userNameCookie].Value != "")
+                if (context.Request.Cookies[token].Value != null && context.Request.Cookies[token].Value.Length > 2)
                 {
-                    context.Items.Add("result", ConfigurationManager.AppSettings["Ok"]);
-                    GenericIdentity identity = new GenericIdentity(context.Request.Cookies[userNameCookie].Value);
-                    GenericPrincipal principal = new GenericPrincipal(identity, null);
-                    context.User = principal;
-                    return;
+                    string cookie = EncryptDecrypt.Decrypt(context.Request.Cookies[token].Value);
+                    string[] arr = cookie.Split('=');
+                    if (arr[0] == "userName")
+                    {
+                        if (IsInDB(arr[1]))
+                        {
+                            context.Items.Add("result", ConfigurationManager.AppSettings["Ok"]);
+                            GenericIdentity identity = new GenericIdentity(arr[1]);
+                            GenericPrincipal principal = new GenericPrincipal(identity, null);
+                            context.User = principal;
+                            return;
+                        }
+                        else
+                        {
+                            context.Response.Cookies.Remove(token);
+                        }
+                    }
                 }
             }
+
+            context.Response.Cookies.Add(new HttpCookie(token, ""));
             context.Response.Cookies.Add(new HttpCookie(userNameCookie, ""));
-            context.Response.Cookies.Add(new HttpCookie(ConfigurationManager.AppSettings["StatusCookie"], ""));
             string login = string.Empty;
             string pass = string.Empty;
             if (context.Request.Form[ConfigurationManager.AppSettings["LoginKey"]] != null && context.Request.Form[ConfigurationManager.AppSettings["PassKey"]] != null)
@@ -63,28 +81,43 @@ namespace FirstSimpleSite.AutificationModules
                 context.Items.Add("result", ConfigurationManager.AppSettings["BadDataMessage"]);
                 return;
             }
+
+            if (IsInDB(login, pass))
+            {
+                context.Items.Add("result", ConfigurationManager.AppSettings["Ok"]);
+                GenericIdentity identity = new GenericIdentity(login);
+                GenericPrincipal principal = new GenericPrincipal(identity, null);
+                context.User = principal;
+
+            }
+            else
+            {
+                context.Items.Add("result", ConfigurationManager.AppSettings["BadPasswordMessage"]);
+            }
+        }
+
+        private bool IsInDB(string userName)
+        {
             using (UserContext uc = new UserContext())
             {
-                User user = uc.Set<User>().FirstOrDefault(u => u.Login == login);
+                User user = uc.Set<User>().FirstOrDefault(u => u.Login == userName);
+                if (user != null) return true;
+                else return false;
+            } 
+        }
+
+        private bool IsInDB(string userName, string pass)
+        {
+            using (UserContext uc = new UserContext())
+            {
+                User user = uc.Set<User>().FirstOrDefault(u => u.Login == userName);
                 if (user != null)
                 {
-                    if (user.Pass == pass)
-                    {
-                        context.Items.Add("result", ConfigurationManager.AppSettings["Ok"]);
-                        GenericIdentity identity = new GenericIdentity(user.Login);
-                        GenericPrincipal principal = new GenericPrincipal(identity, null);
-                        context.User = principal;
-                    }
-                    else
-                    {
-                        context.Items.Add("result", ConfigurationManager.AppSettings["BadPasswordMessage"]);
-                    }
+                    if (user.Pass == pass) return true;
+                    else return false;
 
                 }
-                else
-                {
-                    context.Items.Add("result", ConfigurationManager.AppSettings["BadUserNameMessage"]);
-                }
+                else return false;
             } 
         }
     }

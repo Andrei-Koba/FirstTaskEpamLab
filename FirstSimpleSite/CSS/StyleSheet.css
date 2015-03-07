@@ -55,7 +55,7 @@
             background-image: url(../Content/SampleLogo.png);
             background-size: cover;
         }
-        .hellow {
+        .hello {
             align-content:center;
             font-family:'Times New Roman', Times, serif;
             font:bold;
@@ -67,4 +67,9 @@
         }
         .login-info {
             text-align:center;
+        }
+        .composite {
+           font-style:italic;
+           color:#1f5cd9;
+           cursor:pointer;
         }

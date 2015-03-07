@@ -1,6 +1,18 @@
 ﻿{
-    "name": "Ivan",
+    "name": {
+        "FirstName": "Ivan",
+        "SecondName": "Ivanov"
+    },
     "surname": "Ivanou",
     "age": 19,
-    "adress": { "country": "Belarus", "city": "Minsk" }
+    "adress": {
+        "country": "Belarus",
+        "city": "Minsk",
+        "concrete": {
+            "street": "Lobachevskogo",
+            "building": "3",
+            "apartment": "46"
+        }
+
+    }
 }
